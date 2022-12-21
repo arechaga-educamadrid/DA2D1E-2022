@@ -1,4 +1,6 @@
-﻿internal class Program
+﻿using System.Diagnostics;
+
+internal class Program
 {
     const string UrlBaseServidorMastermind = "http://localhost:5000/";
     static ConfiguracionPartida? _configuracion;
@@ -23,20 +25,24 @@
     {
         return new ConfiguracionPartida()
         {
-
+            Minimo = 1,
+            Maximo = 9,
+            Casillas = 3,
         };
     } // CrearConfiguracionDefecto
 
     private static void ConfigurarPartida()
     {
-        int minimo;
-        int maximo;
-        int casillas;
+        Debug.Assert(_configuracion != null);
+
+        int minimo = _configuracion.Minimo;
+        int maximo = _configuracion.Maximo;
+        int casillas = _configuracion.Casillas;
 
         Console.WriteLine($"La configuración del juego es:");
-        Console.WriteLine($"Valor mínimo:");
-        Console.WriteLine($"Valor máximo:");
-        Console.WriteLine($"Número de casillas:");
+        Console.WriteLine($"Valor mínimo: {minimo}");
+        Console.WriteLine($"Valor máximo: {maximo}");
+        Console.WriteLine($"Número de casillas: {casillas}");
         Console.WriteLine();
 
         Console.Write("¿Quieres cambiar la configuración? (S/N) ");
@@ -95,7 +101,9 @@
 
         _configuracion = new ConfiguracionPartida()
         {
-
+            Minimo = minimo,
+            Maximo = maximo,
+            Casillas = casillas,
         };
     } // ConfigurarPartida
 
