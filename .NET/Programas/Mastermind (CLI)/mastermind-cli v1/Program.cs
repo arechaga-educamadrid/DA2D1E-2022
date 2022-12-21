@@ -18,6 +18,8 @@ internal class Program
             var jugada = ObtenerJugada();
             var resultado = RealizarJugada();
             MostrarResultado(jugada, resultado);
+
+            haGanado = resultado.EsGanador;
         } // while
     } // Main
 
@@ -109,16 +111,34 @@ internal class Program
 
     private static Jugada ObtenerJugada()
     {
-        return null;
+        Console.WriteLine($"Escribe {_configuracion!.Casillas} números (separados por espacios): ");
+        var entrada = Console.ReadLine()?.Trim() ?? "";
+        var numerosTexto = entrada.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+        var numeros = new int[numerosTexto.Length];
+        for (int i=0; i<numerosTexto.Length ; i++) 
+        {
+            numeros[i] = int.Parse(numerosTexto[i]);
+        } // for
+
+        return new Jugada()
+        {
+            Numeros = numeros
+        };
     } // ObtenerJugada
 
     private static ResultadoJugada RealizarJugada()
     {
-        return null;
+        return new ResultadoJugada()
+        {
+            NumeroJugada = -1,
+            Resultado = new string[_configuracion!.Casillas],
+            EsGanador = false,
+            Caducidad = DateTime.UtcNow,
+        };
     } // RealizarJugada
 
     private static void MostrarResultado(Jugada jugada, ResultadoJugada resultado)
     {
-
+        Console.WriteLine($"Jugada #{resultado.NumeroJugada}: " );
     } // MostrarResultado
 } // class Program
