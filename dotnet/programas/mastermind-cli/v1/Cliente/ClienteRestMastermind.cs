@@ -5,17 +5,17 @@ public class ClienteRestMastermind : ClienteRest
         // en blanco
     } // constructor
 
-    public async Task<Guid> NuevaPartida(ConfiguracionPartida configuracion)
+    public async Task<Guid> NuevaPartidaAsync(ConfiguracionPartida configuracion)
     {
         if (IsDisposed) throw new ObjectDisposedException(nameof(ClienteRestMastermind));
 
         return Guid.Empty;
-    } // NuevaPartida
+    } // NuevaPartidaAsync
 
-    public async Task<ResultadoJugada> RealizarJugada(Guid idPartida, Jugada jugada)
+    public async Task<ResultadoJugada> RealizarJugadaAsync(Guid idPartida, Jugada jugada)
     {
         if (IsDisposed) throw new ObjectDisposedException(nameof(ClienteRestMastermind));
 
         return new ResultadoJugada();
-    } // realizarJugada
+    } // realizarJugadaAsync
 } // class ClienteRestMastermind

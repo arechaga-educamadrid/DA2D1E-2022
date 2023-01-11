@@ -4,9 +4,12 @@ Tutorial: Make HTTP requests in a .NET console app using C#
 */
 public class ClienteRest : IDisposable
 {
+    private HttpClient? _clienteHttp;
+
     public ClienteRest(string urlBase)
     {
         UrlBase = urlBase;
+        _clienteHttp = new HttpClient();
     } // constructor
 
     public string UrlBase
@@ -15,10 +18,9 @@ public class ClienteRest : IDisposable
         protected set;
     } // UrlBase
 
-    protected HttpClient? ClienteHttp
+    protected HttpClient ClienteHttp
     {
-        get;
-        private set;
+        get => _clienteHttp ?? throw new ObjectDisposedException(nameof(ClienteRest));
     } // ClienteHttp
 
     #region Implementación de IDisposable y del patrón Disposable
@@ -35,7 +37,7 @@ public class ClienteRest : IDisposable
             // TODO: liberar los recursos no administrados (objetos no administrados) y reemplazar el finalizador
             // TODO: establecer los campos grandes como NULL
 
-            ClienteHttp = null;
+            _clienteHttp = null;
 
             IsDisposed = true;
         } // if
